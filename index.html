@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Greet</title>
-    <script src="//unpkg.com/alpinejs" defer></script>
-    <script src="greet.js"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <script src="./app/greet.js"></script>
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
     <script
@@ -19,49 +19,80 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+
+    <style>
+      .app-container {
+        height: 100vh;
+        width: 100%;
+      }
+      .complete {
+        text-decoration: line-through;
+      }
+    </style>
   </head>
   <body>
-    <div x-data="greet" class="container">
-      <div>
-        <h1>Greet in flask</h1>
-        <div class="greetWidget">
-          <input x-model="username" type="text" />
-          <button x-on:click="greet" class="btn btn-success">Greet me</button>
+    <div
+      class="app-container d-flex align-items-center justify-content-center flex-column"
+      x-data="greet"
+    >
+      <h3>Greet App</h3>
+      <div class="d-flex align-items-center mb-3">
+        <div  class="form-group mr-3 mb-0">
+          <input
+            type="text"
+            class="form-control"
+            id="formGroupExampleInput"
+            placeholder="Enter a name here"
+            x-model="username"
+            required
+          />
         </div>
-        <div class="results">
-          <span>:</span>
-          <p x-text="message"></p>
-        </div>
+        <button  class="btn btn-primary mr-3" x-on:click="greet" >
+          Greet
+        </button>
+        <!-- <button type="button" class="btn btn-warning" ng-click="getTask()">
+          Show Data
+        </button> -->
       </div>
-
-      <div class="radiationWidget">
-        <h1>Radiation</h1>
-        <input
-          type="text"
-          x-model="firstInterval"
-          placeholder="first interval"
-          name=""
-          id=""
-        />
-        <input
-          type="text"
-          name=""
-          id=""
-          x-model="secondInterval"
-          placeholder="second interval"
-        />
-        <input
-          type="text"
-          name=""
-          id=""
-          x-model="thirdInterval"
-          placeholder="third interval"
-        />
-        <button x-on:click="predict" class="btn btn-success">Predict</button>
-        <div class="results">
-          radiation levels: <span x-text="radiationLevel"></span>
-        </div>
+      <div x-show="open" class="alert alert-primary" role="alert" x-text="message">
+        A simple primary alert—check it out!
+      </div>
+      <div class="table-wrapper">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>UserName</th>
+              <th>Timestamp</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template x-for="(user,i) in greetData">
+              <tr>
+                <td x-text="user[0]"></td>
+                <td x-text="user[1]"></td>
+                <td x-text="user[2]"></td>
+                <td>
+                  <button disabled class="btn btn-danger">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
       </div>
     </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
